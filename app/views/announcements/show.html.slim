@@ -1,0 +1,31 @@
+.container
+  =link_to ' Înapoi', announcements_path, class: 'icon-arrow-left pull-left custom'
+  br
+  br
+  h1.well
+    center
+      |&nbsp;
+      b Forum
+
+  ul.unstyled
+    li.custom_div.span6.alert.alert-info
+      /button type="button" class="close" data-dismiss="alert" aria-hidden="true"
+      /  |&times;
+      h2.label.label-warning
+        i.icon-globe.pull-left
+          |&nbsp;
+          ==@announcement.user.email
+      br
+      =image_tag @announcement.user.profile.avatar, class: 'img-rounded', width:200
+      small.text-muted
+        i.icon-time.pull-right
+          |&nbsp;
+          ==@announcement.created_at.to_formatted_s(:db)
+      hr
+      h.label.label-info
+        i.icon-globe.pull-left
+          |&nbsp;
+          ==@announcement.name
+      p.limited_content
+        ==@announcement.description
+    =render 'comments/comment'

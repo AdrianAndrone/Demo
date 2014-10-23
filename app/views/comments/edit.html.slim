@@ -1,0 +1,7 @@
+center
+  =simple_form_for  [@announcement, @comment], :url => {:action => :update} do |f|
+    /=f.input :subject, placeholder: "Nume comm", :required => false, label: 'Subiect'
+    = f.hidden_field :announcement_id, :value =>@announcement.id
+    =f.input :description, as: :text, placeholder: 'Descriere anunt', label: 'Descriere'
+    =f.button :submit , value: "Adaugă", class: "btn btn-success"
+  end

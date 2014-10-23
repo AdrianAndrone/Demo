@@ -1,0 +1,5 @@
+==simple_form_for [@course, @document], :url => {:action => :create} do |f|
+  /==f.input :name
+  ==f.file_field :file
+  ==f.button :submit , value: "Adaugă", class: "btn btn-success"
+end

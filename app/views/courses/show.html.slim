@@ -1,0 +1,61 @@
+==link_to ' Înapoi', courses_path, class: 'icon-arrow-left custom'
+br
+br
+ul.unstyled
+  li.span12.custom_div
+    small.text-muted.pull-right
+      b
+        |Creat la &nbsp;
+        i.icon-time
+        ==@course.created_at.to_formatted_s(:db)
+    h2
+      i.icon-book
+        |&nbsp;
+        ==@course.name
+    hr
+    p
+      b
+        | Titular&nbsp;
+      ==@course.owner
+    p
+      b
+        | Descriere&nbsp;
+      ==@course.description
+    p
+      b Detalii profesor&nbsp;
+      =link_to link_to " Profil", user_profile_path(@teacher, @teacher_profile), class: 'btn'
+
+    hr
+    h3
+      |Acțiuni
+    p
+      ==link_to 'Adaugă un fișier la curs',  new_course_document_path(@course), class: 'btn btn-info' if current_user.profile.vcode==@course.vcode
+      |&nbsp;&nbsp;
+      / ==link_to 'Join', join_course_enrollment_path(@course) , class: 'icon icon-book btn btn-info'
+    p
+    p
+      b.icon-file
+        strong
+          |&nbsp;Fisiere:&nbsp;
+      br
+      -if @course.documents.empty?
+        p
+          center.btn-danger Nu există momentan
+      end
+      br
+        -@course.documents.each do |t|
+          b
+          ==link_to t.file_file_name, course_document_path(@course, t),:target => '_blank', class: 'btn'
+          ==link_to  'X', course_document_path(@course, t), :method=>:delete, class: 'btn' if current_user.teacher?
+          | &nbsp;
+          ==link_to 'Descarcă', download_course_document_path(@course, t) , class: 'btn btn-info'
+          br
+          br
+          end
+        end
+    -if current_user.teacher?
+      p
+        b
+          |Aprobă studenții pentru curs ->>&nbsp;&nbsp;
+        =link_to 'Detalii', course_enrollments_path(@course), class: 'btn btn-warning'
+    end

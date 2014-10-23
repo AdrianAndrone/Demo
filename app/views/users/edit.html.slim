@@ -1,0 +1,6 @@
+=simple_form_for User.find params[:id] do |f|
+  =f.collection_select :role, User::ROLES, :to_s, :humanize
+  br
+  =f.button :submit , value: "Change  ", class: "btn btn-success"
+  br
+end

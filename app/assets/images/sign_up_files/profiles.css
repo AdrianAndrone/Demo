@@ -1,0 +1,8 @@
+/* line 6, ../../app/assets/stylesheets/profiles.css.scss */
+hr.horizontal-line {
+  height: 2px;
+  background-image: linear-gradient(to right, transparent 0%, black 100%);
+  border-radius: 5px;
+  -webkit-filter: blur(1px);
+  margin: auto;
+}

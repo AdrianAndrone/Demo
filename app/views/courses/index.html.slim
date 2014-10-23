@@ -1,0 +1,359 @@
+.row
+  .span12
+    h3.well
+      center
+        |Cursuri
+    #spinner
+      img src="https://www.google.ro/search?q=spinner+ios&tbm=isch&imgil=N9cDhcH1fs2KaM%253A%253Bhttps%253A%252F%252Fencrypted-tbn3.gstatic.com%252Fimages%253Fq%253Dtbn%253AANd9GcRnjuJbc3-EVjP5lMwyqDxEbDfMwTir9Nh1rKqwkFkJ4SocioADMQ%253B616%253B493%253Bovv0ntCQlcMSNM%253Bhttp%25253A%25252F%25252Fwww.webpronews.com%25252Fios-shutdown-spinner-finally-gets-the-retina-treatment-2012-06&source=iu&usg=__Owc-NAaMYNQJeeLJwuqY3QVKM7o%3D&sa=X&ei=KrKJU-S5F7DN7AbryoGYDg&ved=0CC0Q9QEwAA#facrc=_&imgrc=N9cDhcH1fs2KaM%253A%3Bovv0ntCQlcMSNM%3Bhttp%253A%252F%252Fcdn.ientry.com%252Fsites%252Fwebpronews%252Farticle_pics%252Fios6-spinner.png%3Bhttp%253A%252F%252Fwww.webpronews.com%252Fios-shutdown-spinner-finally-gets-the-retina-treatment-2012-06%3B616%3B493" alt="Loading..."
+    /=@courses_searched.inspect
+    /=@search.inspect
+    / -if @courses_searched.present?
+    /   .custom_div.alert.alert-danger.span6
+    /     button type="button" class="close" data-dismiss="alert" aria-hidden="true"
+    /      |&times;
+    /     puts Nu există curs cu acest nume !
+    / -else
+    /   -if @search.nil?
+    /     puts "NU"
+    /   -else
+    /     -@courses_searched.each do |t|
+    /       |Cursul căutat este : &nbsp;
+    /       =link_to t.name, course_path(t), class: 'custom'
+    /     end.
+    /   end
+    / end
+
+    -unless @courses_searched.nil?
+      -@courses_searched.each do |t|
+        h4
+          |Cursul căutat este : &nbsp;
+          =link_to t.name, course_path(t), class: 'custom'
+      end
+      -if @courses_searched.blank?
+        .custom_div.alert.alert-danger
+          button type="button" class="close" data-dismiss="alert" aria-hidden="true"
+            |&times;
+          puts Nu există curs cu acest nume !
+      end
+    end
+
+      /-if Course.count != @courses_searched.length
+      /-@courses_searched.each do |t|
+       / |Cursul căutat este : &nbsp;
+      /  =link_to t.name, course_path(t), class: 'custom'
+      /end
+      /end
+    /end
+    br
+    =link_to ' Adaugă', new_course_path(@course), class: 'btn btn-primary icon-plus-sign pull-right' unless current_user.student? or current_user.admin?
+    br
+    / table class="table table-striped"
+    /   thead
+    /     tr.succes
+    /       th class="muted" Id
+    /       th class="muted" Nume
+    /       th class="muted" Owner
+    /       th class="muted" Descriere
+    /       th class="muted" Data crearii
+    /   tbody
+    /     -@courses.each do |co|
+    /       tr.succes
+    /         td
+    /           strong
+    /             =co.id
+    /         td
+    /           strong
+    /             =co.name
+    /         td.limited_content
+    /           strong
+    /             =co.owner
+
+    /         td.limited_content
+    /           strong
+    /             =co.description
+    /         td
+    /           =co.created_at.strftime("%d %b. %Y")
+    /         td
+    /           =link_to ' Vizualizeaza', course_path(co), class: 'btn btn-info icon-eye-open' unless current_user.student?
+    /         td
+    /           =link_to ' Sterge', course_path(co), method: :delete, class: 'btn btn-info icon-trash' unless current_user.student?
+    /         td
+    /          /-link_to ' join', join_path, class: 'icon icon-book btn btn-info' s-a mutat in show view
+    /         td
+    /           /=link_to('Descarca', download_path(co))
+    /     end
+
+    / p
+     // =select_tag  'selK', options_for_select(@all_courses.collect{ |u|[u.year , u.id]}), :prompt => "Select an year"
+
+  / .span12
+  /   -if current_user.student?
+  /     ==render partial: 'first_year'
+  /   end
+  / ul.nav.nav-tabs#myTab
+  /   li
+  /     a  href='/' data-toggle="tab"
+  /       | Cursuri
+  /     a href="/" data-toggle="tab"
+  /       | Cursurile mele
+
+
+  .container.span12
+    ul.nav.nav-tabs
+      -unless current_user.admin?
+        li.active
+          a href="#tab5" data-toggle="tab"
+            b Cursurile mele
+      end
+      li
+        a href="#tab1" data-toggle="tab"
+          b Anul 1
+      li
+        a href="#tab2" data-toggle="tab"
+          b Anul 2
+      li
+        a href="#tab3" data-toggle="tab"
+          b Anul 3
+      li
+        a href="#tab4" data-toggle="tab"
+          b Anul 4
+    .span12
+      div class="tab-content"
+        div class="tab-pane" id="tab1"
+          table class="table table-striped"
+            thead
+              tr.succes
+                th class="muted" Id
+                th class="muted" Nume
+                th class="muted" Titular
+                th class="muted" Descriere
+                th class="muted" Data crearii
+            tbody
+            -@first_year_collection.each do |co|
+              tr.succes
+                td
+                  strong
+                    =co.id
+                td
+                  strong
+                    =co.name
+                td.limited_content
+                  strong
+                    =co.owner
+
+                td.limited_content
+                  strong
+                    =co.description
+                td
+                  =co.created_at.strftime("%d %b. %Y")
+                td
+                  =link_to ' Vizualizează', course_path(co), class: 'btn btn-info icon-eye-open' if current_user.admin?
+                td
+                  -if current_user.student? and @enrollment.nil? and co.enrollments.where(user_id: current_user.id).length<1
+                    ==link_to ' Înscrie-te!', join_course_enrollments_path(co) , class: 'icon icon-book btn btn-info' if co.enrollments.where(:user_id=>current_user.id).first ==nil or  co.enrollments.where(:user_id=>current_user.id).first.state == 'pending'
+                  end
+                td
+                  =link_to ' Șterge', course_path(co), method: :delete, class: 'btn btn-info icon-trash' if current_user.admin?
+            end
+          -if @first_year_collection.empty?
+            tr
+              center.alert
+                puts Nu exista cursuri de anul 1 create
+          end
+        div class="tab-pane" id="tab2"
+          table class="table table-striped"
+            thead
+              tr.succes
+                th class="muted" Id
+                th class="muted" Nume
+                th class="muted" Titular
+                th class="muted" Descriere
+                th class="muted" Data crearii
+            tbody
+            -@second_year_collection.each do |co|
+              tr.succes
+                td
+                  strong
+                    =co.id
+                td
+                  strong
+                    =co.name
+                td.limited_content
+                  strong
+                    =co.owner
+
+                td.limited_content
+                  strong
+                    =co.description
+                td
+                  =co.created_at.strftime("%d %b. %Y")
+                td
+                  =link_to ' Vizualizează', course_path(co), class: 'btn btn-info icon-eye-open' if current_user.admin?
+                td
+                  -if current_user.student? and  @enrollment.nil? and co.enrollments.where(user_id: current_user.id).length<1
+                    ==link_to ' Înscrie-te!', join_course_enrollments_path(co) , class: 'icon icon-book btn btn-info' if co.enrollments.where(:user_id=>current_user.id).first ==nil or  co.enrollments.where(:user_id=>current_user.id).first.state == 'pending'
+                  end
+                td
+                  =link_to ' Șterge', course_path(co), method: :delete, class: 'btn btn-info icon-trash' if current_user.admin?
+            end
+          -if @second_year_collection.empty?
+            tr
+              center.alert
+                puts Nu exista cursuri de anul 2 create
+          end
+        div class="tab-pane" id="tab3"
+          table class="table table-striped"
+            thead
+              tr.succes
+                th class="muted" Id
+                th class="muted" Nume
+                th class="muted" Titular
+                th class="muted" Descriere
+                th class="muted" Data crearii
+            tbody
+            -@third_year_collection.each do |co|
+              tr.succes
+                td
+                  strong
+                    =co.id
+                td
+                  strong
+                    =co.name
+                td.limited_content
+                  strong
+                    =co.owner
+
+                td.limited_content
+                  strong
+                    =co.description
+                td
+                  =co.created_at.strftime("%d %b. %Y")
+                td
+                  =link_to ' Vizualizează', course_path(co), class: 'btn btn-info icon-eye-open' if current_user.admin?
+                td
+                  -if current_user.student? and  @enrollment.nil? and co.enrollments.where(user_id: current_user.id).length<1
+                    ==link_to ' Înscrie-te!', join_course_enrollments_path(co) , class: 'icon icon-book btn btn-info' if co.enrollments.where(:user_id=>current_user.id).first ==nil or  co.enrollments.where(:user_id=>current_user.id).first.state == 'pending'
+                  end
+                td
+                  =link_to ' Șterge', course_path(co), method: :delete, class: 'btn btn-info icon-trash' if current_user.admin?
+            end
+          -if @third_year_collection.empty?
+            tr
+              center.alert
+                puts Nu exista cursuri de anul 3 create
+          end
+        div class="tab-pane" id="tab4"
+          table class="table table-striped"
+            thead
+              tr.succes
+                th class="muted" Id
+                th class="muted" Nume
+                th class="muted" Titular
+                th class="muted" Descriere
+                th class="muted" Data crearii
+            tbody
+            -@last_year_collection.each do |co|
+              tr.succes
+                td
+                  strong
+                    =co.id
+                td
+                  strong
+                    =co.name
+                td.limited_content
+                  strong
+                    =co.owner
+
+                td.limited_content
+                  strong
+                    =co.description
+                td
+                  =co.created_at.strftime("%d %b. %Y")
+                td
+                  =link_to ' Vizualizează', course_path(co), class: 'btn btn-info icon-eye-open' if current_user.admin?
+                td
+                  -if current_user.student? and  @enrollment.nil? and co.enrollments.where(user_id: current_user.id).length<1
+                    ==link_to ' Înscrie-te!', join_course_enrollments_path(co) , class: 'icon icon-book btn btn-info' if co.enrollments.where(:user_id=>current_user.id).first ==nil or  co.enrollments.where(:user_id=>current_user.id).first.state == 'pending'
+                  end
+                td
+                  =link_to ' Șterge', course_path(co), method: :delete, class: 'btn btn-info icon-trash' if current_user.admin?
+            end
+          -if @last_year_collection.empty?
+            tr
+              center.alert
+                puts Nu exista cursuri de anul 4 create
+          end
+        div class="tab-pane active" id="tab5"
+          table class="table table-striped"
+            thead
+              tr.succes
+                th class="muted" Id
+                th class="muted" Nume
+                th class="muted" Titular
+                th class="muted" Descriere
+                th class="muted" Anul
+                th class="muted" Data creării
+                th class="muted" Acțiuni
+            tbody
+            -unless @my_courses.nil?
+              -@my_courses.each do |co|
+                -unless co.enrollments.last.state == 'rejected'
+                  tr.succes
+                    td
+                      strong
+                        =co.id
+                    td
+                      strong
+                        =co.name
+                    td.limited_content
+                      strong
+                        =co.owner
+
+                    td.limited_content
+                      strong
+                        =co.description
+                    td.limited_content
+                      strong
+                        =co.year
+                    td
+                      =co.created_at.strftime("%d %b. %Y")
+                    td
+                      =link_to ' Vizualizeaza', course_path(co), class: 'btn btn-info icon-eye-open' if current_user.student? and co.enrollments.where(:user_id=>current_user.id).first.state == 'accepted'
+                    td
+                      =link_to ' Sterge', course_path(co), method: :delete, class: 'btn btn-info icon-trash' unless current_user.student?
+                end
+              end
+              -@teacher_courses.each do |co|
+                tr.succes
+                  td
+                    strong
+                      =co.id
+                  td
+                    strong
+                      =co.name
+                  td.limited_content
+                    strong
+                      =co.owner
+
+                  td.limited_content
+                    =co.description
+                  td.limited_content.trick
+                    =co.year
+                  td
+                    =co.created_at.strftime("%d %b. %Y")
+                  td
+                    =link_to ' Vizualizează', course_path(co), class: 'btn btn-info icon-eye-open' if current_user.teacher?
+                    |&nbsp;
+                    =link_to ' Editează', edit_course_path(co), class: 'btn btn-info icon-pencil' if current_user.teacher?
+                    |&nbsp;
+                    =link_to ' Șterge', course_path(co), method: :delete, class: 'btn btn-info icon-trash' unless current_user.student?
+              end
+            end
+          -if @my_courses.empty? and @teacher_courses.empty? and current_user.admin? == false
+            tr
+              center.alert
+                puts Nu ai cursuri create sau la care te-ai inscris inca.
+          end
+  .pagination
+    center
+      ==paginate @courses

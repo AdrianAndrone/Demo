@@ -1,0 +1,95 @@
+.row
+  .span12
+    .well.herro-unit
+      h1
+        center
+          | Bun venit Admin !
+/-pairs={accepted }
+.row
+  .span3
+    h3 Useri in total
+    p.badge.badge-inverse
+      =@confirmed_users.count+@unconfirmed_users.count
+  .span3
+    h3 Useri confirmați
+    p.badge.badge-inverse
+      =@confirmed_users.count
+  .span3
+    h3 Useri neconfirmați
+    p.badge.badge-inverse
+      =@unconfirmed_users.count
+  .span3
+    h3 Roluri
+    p
+    -User::ROLES.each do |t|
+      =content_tag(:b, t, class: 'badge badge-inverse' )
+    end
+.row
+  -unless @confirmed_users.empty?
+    .span6.page-header
+      h2
+        |Useri confirmați
+      table.table-bordered
+        thead
+          tr
+            th EMAIL
+            th STATUS
+            th ROL
+            th ACTIUNI
+
+        tbody
+          -@confirmed_users.each do |user|
+            tr
+              td
+                =user.email
+                |&nbsp;
+              td
+                =content_tag(:b, user.state, :class => user_state(user))
+                |&nbsp;
+              td
+                =content_tag(:b, user.role, :class => 'badge badge-info')
+
+                |&nbsp;
+              td
+                =link_to 'Schimba rol', edit_user_path(user),class: 'btn btn-small'
+                |&nbsp;
+                =link_to 'Respinge', suspended_user_path(user), class: 'btn btn-small'
+                / =link_to 'Profil' , user_profile_path([user, user.profile]), class: 'btn btn-small'
+                /=link_to 'Accept', accepted_user_path(user), class: 'btn btn-small'
+                =link_to 'Profil' , user_profile_path(user, user.profile), class: 'btn btn-small'
+
+          end
+  -unless @unconfirmed_users.empty?
+    .span6.page-header
+      h2
+        |Useri neconfirmați
+      table.table-bordered
+        thead
+          tr
+            th EMAIL
+            th STATUS
+            th ROL
+            th ACTIUNI
+
+        tbody
+          -@unconfirmed_users.each do |user|
+            tr
+              td
+                =user.email
+                |&nbsp;
+              td
+                =content_tag(:b, user.state, :class => user_state(user))
+                |&nbsp;
+              td
+                =content_tag(:b, user.role, :class => "badge badge-info")
+                  /=user.role
+                |&nbsp;
+              td
+                /=link_to 'Schimba rolul', edit_user_path(user),class: 'btn btn-small'
+                |&nbsp;
+                =link_to 'Respinge', suspended_user_path(user), class: 'btn btn-small'
+                =link_to 'Accept', accepted_user_path(user), class: 'btn btn-small'
+                =link_to 'Profil' , user_profile_path(user, user.profile), class: 'btn btn-small'
+          end
+
+

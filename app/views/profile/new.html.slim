@@ -1,0 +1,27 @@
+=content_for :profil
+  ==simple_form_for @profile, :url => {:action => :create} do |f|
+    ==f.input :firstname, placeholder: "Prenume", :required => true, label: 'Prenume'
+    ==f.input :lastname, placeholder: "Nume",:required => true ,label: 'Nume'
+    ==f.input :email, placeholder: "Email", :required => true
+    ==f.input :about, as: :text, placeholder: "Despre", :required => false, label: 'Despre'
+    ==f.file_field :avatar
+    /==f.input :email, placeholder: "Last Name", :required => true
+
+    /==f.file_field :file
+    / =f.input :gender,
+    /       :collection => [[true, 'Male'], [false, 'Female']],
+    /       :label_method => :last,
+    /       :value_method => :first,
+    /       :as => :radio_buttons,
+    /       :item_wrapper_class => 'inline',
+    /       :checked => true
+    /=f.input :birthday, as: :date, start_year: Date.today.year - 90,end_year: Date.today.year - 12,order: [:day, :month, :year]
+    br
+    strong
+      |Toate campurile marcate cu &nbsp;
+      sup *
+      |&nbsp;sunt obligatorii.
+    br
+    br
+    ==f.button :submit , value: "Crează", class: "btn btn-success"
+end

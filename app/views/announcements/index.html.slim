@@ -1,0 +1,37 @@
+h3.well
+  center
+    |Anunțuri
+h1
+  =link_to ' Adaugă ', new_announcement_path(@announcement), class: 'btn btn-primary icon-plus-sign pull-right'
+br
+br
+table class="table table-striped table-hover table-bordered"
+  thead
+    tr.succes
+      th Id
+      th Nume
+      th Descriere
+      th Data creării
+      th Acțiuni
+  tbody
+    -@announcements.each do |an|
+      tr.succes
+        td
+          strong
+            =an.id
+        td
+          strong
+            =an.name
+
+        td.span4.limited_content
+          =an.description
+        td
+          =an.created_at.to_formatted_s(:db)
+        td.span2
+          =link_to ' Vizualizează',  announcement_path(an), class: 'btn btn-info icon-eye-open '
+        td.span2
+          =link_to ' Editează', edit_announcement_path(an),  class: 'btn btn-info icon-pencil' if current_user==an.user or current_user.admin?
+        td.span2
+          =link_to ' Șterge', announcement_path(an), method: :delete, class: 'btn btn-danger icon-trash' if current_user.admin? or current_user==an.user
+
+    end

@@ -1,0 +1,20 @@
+center
+  ==simple_form_for Course.find params[:id] do |f|
+    ==f.input :name, placeholder: "Nume curs", :required => true, label: 'Nume curs'
+    ==f.input :owner, placeholder: "Titular",:required => true, default: current_user.profile.firstname,label: "Titular"
+    ==f.input :year, placeholder: "An de studiu cuprins intre 1:4" ,require: true, label: 'Anul'
+    ==f.input :description, as: :text,  placeholder: 'Descrierea personală', label: 'Descriere'
+    br
+    strong
+      |Toate campurile marcate cu &nbsp;
+      sup *
+      |&nbsp;sunt obligatorii.
+    p
+      |&nbsp;&nbsp;&nbsp;Codul tau este:&nbsp;
+      em
+        b
+          ==current_user.profile.vcode
+    /==f.file_field :file
+    br
+    ==f.button :submit , value: "Adaugă", class: "btn btn-success"
+  end

@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        email: "Emailllll"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Te rugam sa specifici un id "
+              taken: "Email-ul selectat a fost luat"
+              invalid: "Email-ul este invalid 0000"
+            password:
+              blank: "Te rugam sa specifici parola nenula"
+              confirmation: "Parola nu se sincronizeaza cu confirm_pass"
+              too_short: "Parola trebuie (minimum is 8 characters)"
+              blank: "Specifica parola confirmation"
+              confirmation: "Parola nu se sincronizeaza cu confirm_pass"
+              too_short: "Parola trebuie (minimum is 8 characters)"
+            # first_name:
+            #   blank: "Scecifica Email-ul"
+            # last_name:
+            #   blank: "Specify parola"

@@ -1,0 +1,14 @@
+ul.unstyled
+  -@comments.each do |comment|
+    li.span6.custom_div
+      h4.badge.badge-success
+        =comment.user.email
+      small.text-muted
+        i.icon-time.pull-right
+          =comment.created_at.strftime("%d %b. %Y")
+        hr
+        p.limited_content
+          b Descriere comment:
+          br
+          =comment.description
+  end

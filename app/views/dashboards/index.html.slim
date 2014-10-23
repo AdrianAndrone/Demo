@@ -1,0 +1,55 @@
+.hello-unit
+  center
+    br
+    h1.custom.icon-leaf &nbsp; DEMO APP
+    h4.custom Nr de vizite
+    a.btn.btn-large.custom href='/'  =current_user.sign_in_count
+    /Performance-based Education Platform
+    br
+    br
+    br
+/ center
+/   p.span7.offset2
+/     br
+
+      / | Platforma educationala bazata pe performanta in educatie se adreseaza atat studentilor cat si profesorilor dintr-o universitate.
+        / | Platforma are o interfata prietenoasa, care permite utilizarea unor instrumente capabile sa permita interactiunea student-profesor. Prin intermediul acestor instrumente se va imbunatatii comunicarea intre elevi si profesori,  studenti imbunatatindu-si cunostintele tehnice, prin cursurile disponibile atasate profesorior.
+        / |Platforma contine si o sectiune de forum, prin care se permite o comunicare intre elevi-profesori pentru imbunatirea notinuilor.
+      / |Performance-based programs allow students to earn credit in an innovative manner that recognizes the skills they already bring to the table. Course content is organized into blocks.
+      / |Students work at their own pace with the support of a Faculty Facilitator and then complete assessments that measure course outcomes. Students learn the information required to master the material by utilizing learning objects identified in the block, by utilizing prior knowledge from their experience, or they can identify alternative learning objects that best serve their learning style. Students' assessments are evaluated according to the rubric by independent Faculty Outcomes Evaluators. Students may proceed as quickly or slowly as best suits them to complete the Block, up to a maximum of 2 quarters.For students who have the right experience, this can be a great learning option.
+      / |Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      / |tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      / |quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      / |consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      / |cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      / |proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+.row
+  #myCarousel.carousel.slide.span12
+    ol.carousel-indicators
+      li.active data-target="#myCarousel" data-slide-to="0"
+      li data-target="#myCarousel" data-slide-to="1"
+      li data-target="#myCarousel" data-slide-to="2"
+    ol.carousel-inner
+      .active.item.background_block
+        =image_tag(asset_path('happy_student.jpg'), class: 'img-rounded override')
+        .carousel-caption
+          h3.mark
+            |Platformă educațională
+      .item.background_block
+        =image_tag(asset_path('learn.jpg'), class: 'img-rounded override')
+        .carousel-caption
+          h3.mark
+            |Platformă educațională
+      .item.background_block
+        =image_tag(asset_path('online_book.jpg'), class: 'img-rounded override')
+        .carousel-caption
+          h3.mark
+            |Platformă educațională
+        / a.right.carousel-control href="#myCarousel" data-slide="prev"
+        /   small -
+        / a.carousel-control.left href="#myCarousel" data-slide="next"
+        /   small -
+
+.row
+  .span12
+   / a.pull-right.btn.btn-large.custom href='#' Codul sursă

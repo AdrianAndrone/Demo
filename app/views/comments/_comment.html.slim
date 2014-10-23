@@ -1,0 +1,40 @@
+-@comment.each do |comment|
+  .custom_div.alert.alert-info.span6
+    button type="button" class="close" data-dismiss="alert" aria-hidden="true"
+      |&times;
+    br
+    h4.limited_content.span4
+      =comment.user.email
+    small.text-muted
+      i.icon-time.pull-right
+        |&nbsp;
+        =comment.created_at.to_formatted_s(:db)
+      br
+      hr
+      p.limited_content
+        b Descriere:
+        br
+        =comment.description
+      p.pull-right
+        b
+          =link_to 'Șterge',[ @announcement, comment ], method: :delete
+        |&nbsp;&nbsp;
+        b  =link_to 'Editează', edit_announcement_comment_path(@announcement, comment)
+
+
+.well.alert.span6
+  center
+    ==simple_form_for [@announcement, @comm] do |f|
+      ==hidden_field_tag 'announcement_id', @announcement.id
+      ==f.input :description, as: :text, placeholder:'                     Completează în acest câmp', input_html: {class: "span4", rows: 6},label: 'Coment'
+      ==f.button :submit , value: "Adaugă", class:"btn btn-info"
+      br
+      h6.pull-right 160 caractere disponibile
+    end
+
+
+
+
+
+
+

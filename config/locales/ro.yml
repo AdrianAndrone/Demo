@@ -1,0 +1,25 @@
+ro:
+  activerecord:
+    attributes:
+      user:
+        email: "Email"
+        password: "Parola"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Te rugam sa specifici un id nenul"
+              taken: "selectat a fost luat"
+              invalid: "invalid"
+            password:
+              blank: "Te rugam sa specifici parola nenula"
+              confirmation: "Parola nu se sincronizeaza cu confirm_pass"
+              too_short: "Parola trebuie (minimum is 8 characters)"
+              blank: "Specifica parola "
+              confirmation: "-nu se sincronizeaza"
+              too_short: "-minim 8 caractere"
+        course:
+          attributes:
+            year:
+              inclusion: "&nbsp; &nbsp;trebuie sa fie cuprins intre 1...4"

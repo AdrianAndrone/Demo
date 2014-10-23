@@ -1,0 +1,19 @@
+==simple_form_for @profile, :url=>{action: :update} do |f|
+
+  ==f.input :firstname, placeholder: "Prenume", :required => false, label: 'Prenume'
+  ==f.input :lastname, placeholder: "Nume",:required => false,  label: 'Nume'
+  ==f.input :email, placeholder: "Email", :required => false, label: 'Email'
+  ==f.input :phone_number, label: 'Telefon'
+  ==f.input :about, as: :text, placeholder: "Despre", :required => false,label: 'Despre'
+  ==f.file_field :avatar
+  -if current_user.teacher?
+    p
+      |Codul d-voastră este:
+      b
+        |&nbsp;
+        ==@profile.vcode
+  end
+  br
+  br
+  ==f.button :submit , value: "Editare profil", class: "btn btn-success"
+end

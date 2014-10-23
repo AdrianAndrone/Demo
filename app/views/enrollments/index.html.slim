@@ -1,0 +1,52 @@
+.row
+  .span12
+    .well.herro-unit
+      h1
+        center
+          | Bun venit!
+    -if @enrollments.empty?
+      center
+        h3 Nu există studenți înscriși la curs.
+    end
+    / -@enrollments.each do |cc|
+    /   br
+    /   td
+    /     span
+    /       h2
+    /         =cc.user.email
+    /     | &nbsp;
+    /     b Stare:
+    /     |&nbsp;
+    /     p.label.label-warning
+    /       ==cc.state
+    /     | &nbsp;
+    /     =link_to 'Acceptă', approved_course_enrollment_path(@course ,cc), class: 'btn btn-success'
+    /     | &nbsp;
+    /     =link_to 'Respinge', rejected_course_enrollment_path(@course, cc), class: 'btn btn-danger'
+    /     | &nbsp;
+    /     =link_to 'Respinge temporar', suspended_course_enrollment_path(@course, cc), class: 'btn btn-info'
+    / end
+    -unless @enrollments.nil?
+      table.table-bordered
+        thead
+          tr
+            th EMAIL
+            th STARE
+            th ACTIUNI
+            th
+        tbody
+          -@enrollments.each do |ins|
+            tr
+              td
+                =ins.user.email
+                |&nbsp;
+              td
+                =content_tag(:b, ins.state, :class => helper_state(ins))
+              td
+                =link_to 'Acceptă', approved_course_enrollment_path(@course ,ins), class: 'btn btn-success'
+                | &nbsp;
+                =link_to 'Respinge', rejected_course_enrollment_path(@course, ins), class: 'btn btn-danger'
+                | &nbsp;
+                =link_to 'Respinge temporar', suspended_course_enrollment_path(@course, ins), class: 'btn btn-info'
+          end
+    end

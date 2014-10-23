@@ -1,0 +1,6 @@
+center
+  =simple_form_for @announcement do |f|
+    =f.input :name, placeholder: "Nume anunț", :required => false, label: 'Nume'
+    =f.input :description, as: :text, placeholder: 'Descriere anunț', label: 'Descriere'
+    =f.button :submit , value: "Adaugă", class: "btn btn-success"
+  end

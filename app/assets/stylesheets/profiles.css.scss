@@ -1,0 +1,13 @@
+// Place all the styles related to the profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+hr.horizontal-line{
+  height:2px;
+  background-image: linear-gradient(to right, transparent 0%, black 100%);
+  border-radius: 5px;
+  -webkit-filter: blur(1px);
+  margin: auto;
+
+}

@@ -1,0 +1,12 @@
+/* line 5, ../../app/assets/stylesheets/announcements.css.scss */
+.btn-fix {
+  margin-left: 70px;
+}
+
+/* line 9, ../../app/assets/stylesheets/announcements.css.scss */
+.custom_div {
+  border-radius: 5px;
+  border: 2px solid gray;
+  padding: 20px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,46 @@
+-2.times do
+  br
+end
+
+.row
+  .span4.well
+    center
+      h3 Avatar
+      hr.horizontal_line
+      =image_tag @profile.avatar.url, alt: 'Hello', title: 'Unknown', width:200, class:"img-rounded"
+      hr.horizontal_line
+      -if current_user.teacher?
+        ==simple_form_for @profile, :url=>{action: :update} do |f|
+            ==f.file_field :avatar, :required => true
+            ==f.button :submit , value: "Schimbă poza", class: "btn btn-success"
+        end
+      end
+  .span7.well.pull-right
+    center
+      h3 Informații de bază
+    hr.horizontal_line
+    ul.unstyled
+      li
+        b Nume:&nbsp;
+        =@profile.lastname
+      li
+        b Prenume:&nbsp;
+        =@profile.firstname
+      li
+        b Role:&nbsp;
+        =@profile.user.role
+      hr
+      h4
+        b Date de contact
+
+      li
+        b Email:&nbsp;
+        =@profile.email
+      li
+        b Telefon:&nbsp;
+        =@profile.phone_number
+      li
+        b Despre:&nbsp;
+        =@profile.about
+      hr
+
