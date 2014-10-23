@@ -1,2 +1,1 @@
-Demo
-====
+ Basic Moodle Platform. 
